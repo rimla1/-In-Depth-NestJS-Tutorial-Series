@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 
 @Controller('users')
 export class UsersController {
@@ -11,37 +11,10 @@ export class UsersController {
     ];
   }
 
-  @Get('posts')
-  getUsersPosts() {
-    return [
-      {
-        name: 'Test',
-        email: 'test@test.com',
-        posts: [
-          { id: 1, title: 'Post 1' },
-          { id: 2, title: 'Post 2' },
-        ],
-      },
-      {
-        name: 'Test3',
-        email: 'test3@test.com',
-        posts: [
-          { id: 3, title: 'Post 3' },
-          { id: 2, title: 'Post 4' },
-        ],
-      },
-    ];
+  @Post()
+  createUser(@Body() body: any){
+  console.log(body)
+  return 'User Created!'
   }
 
-  @Get('post/comments')
-  getPostComments() {
-    return {
-      id: 1,
-      title: 'Post 1',
-      comments: [
-        { userId: 1, description: 'Nice bro!' },
-        { userId: 2, description: 'WoW!' },
-      ],
-    };
-  }
 }
