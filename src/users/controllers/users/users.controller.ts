@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Query, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Post, Query, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CreateUserDto } from 'src/users/dtos/createUser.dto';
 
 @Controller('users')
@@ -22,8 +22,8 @@ export class UsersController {
   }
 
   @Get(":id")
-  getUser(@Param() params: any){
-    const {id} = params
+  getUser(@Param("id", ParseIntPipe) id: number){
+    console.log(typeof(id))
     return `user with id ${id} found!`
   }
 
