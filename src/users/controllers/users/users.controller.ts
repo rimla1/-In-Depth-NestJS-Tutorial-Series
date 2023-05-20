@@ -1,4 +1,5 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { CreateUserDto } from 'src/users/dtos/createUser.dto';
 
 @Controller('users')
 export class UsersController {
@@ -12,9 +13,16 @@ export class UsersController {
   }
 
   @Post()
-  createUser(@Body() body: any){
-  console.log(body)
+  createUser(@Body() userData: CreateUserDto){
+  const {name, email} = userData
+  console.log(name, email)
   return 'User Created!'
+  }
+
+  @Get(":id")
+  getUser(@Param() params: any){
+    const {id} = params
+    return `user with id ${id} found!`
   }
 
 }
