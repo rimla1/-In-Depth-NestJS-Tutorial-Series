@@ -1,16 +1,17 @@
 import { Body, Controller, Get, Param, ParseIntPipe, Post, Query, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CreateUserDto } from 'src/users/dtos/createUser.dto';
+import { UsersService } from 'src/users/services/users/users.service';
 
 @Controller('users')
 export class UsersController {
+
+    constructor(private readonly usersService: UsersService){}
+
   @Get()
-  getUsers(@Query("sortBy") sortBy) {
+  async getUsers(@Query("sortBy") sortBy) {
     console.log(sortBy)
-    return [
-      { name: 'Test', email: 'test@test.com' },
-      { name: 'Test2', email: 'test2@test.com' },
-      { name: 'Test3', email: 'test3@test.com' },
-    ];
+    const users = await this.usersService.getUsers()
+    return users
   }
 
   @Post()
