@@ -27,12 +27,5 @@ export class UsersController {
     return `user with id ${id} found!`
   }
 
-  @Get("user/:name")
-  getUserByName(@Param('name') name: string){
-    console.log(name)
-    return `user with name ${name} found!!!!`
-  }
-
-
 
 }
