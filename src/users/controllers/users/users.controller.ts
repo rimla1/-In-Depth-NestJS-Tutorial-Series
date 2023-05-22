@@ -8,8 +8,7 @@ export class UsersController {
     constructor(private readonly usersService: UsersService){}
 
   @Get()
-  async getUsers(@Query("sortBy") sortBy) {
-    console.log(sortBy)
+  async getUsers() {
     const users = await this.usersService.getUsers()
     return users
   }
@@ -18,14 +17,13 @@ export class UsersController {
   @UsePipes(new ValidationPipe())
   createUser(@Body() userData: CreateUserDto){
   const {name, email} = userData
-  console.log(name, email)
-  return 'User Created!'
+  const result = this.usersService.createUser(name, email)
+  return result
   }
 
   @Get(":id")
   getUser(@Param("id", ParseIntPipe) id: number){
-    console.log(typeof(id))
-    return `user with id ${id} found!`
+    return this.usersService.getUserById(id)
   }
 
 
