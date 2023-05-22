@@ -9,6 +9,6 @@ import { UsersService } from './services/users/users.service';
 })
 export class UsersModule implements NestModule{
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(ExampleMiddleware).forRoutes('users')
+    consumer.apply(ExampleMiddleware).forRoutes(UsersController)
   }
 }
