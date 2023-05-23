@@ -1,14 +1,16 @@
 import { Body, Controller, Get, HttpException, HttpStatus, Param, ParseIntPipe, Post, Query, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CreateUserDto } from 'src/users/dtos/createUser.dto';
+import { AuthenticationGuard } from 'src/users/guards/authentication/authentication.guard';
 import { ValidateCreateUserPipe } from 'src/users/pipes/validate-create-user/validate-create-user.pipe';
 import { UsersService } from 'src/users/services/users/users.service';
 
 @Controller('users')
+@UseGuards(AuthenticationGuard)
 export class UsersController {
 
     constructor(private readonly usersService: UsersService){}
 
-  @UseGuards()
+
   @Get()
   async getUsers() {
     const users = await this.usersService.getUsers()
